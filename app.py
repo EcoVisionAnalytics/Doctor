@@ -86,7 +86,12 @@ doc_output = st.empty()
 req_output = st.empty()
 warning_placeholder = st.empty()
 
-# OpenAI client
+# Check API key
+if "OPENAI_API_KEY" not in st.secrets:
+    st.error("❌ OpenAI API key not found. This app will not work until configured in Streamlit secrets.")
+    st.stop()
+
+# Create OpenAI client (new SDK style)
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Query function
